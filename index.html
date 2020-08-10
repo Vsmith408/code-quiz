@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container" id="welcome">
+        <div class="row">
+            <div class="col-12 text-center ">
+                <h1 id="header">
+                    Code Quiz!
+                </h1>
+                <p id="description">
+                    Want to see how much JavaScript you really know compared to others? Take this quiz to find out!
+                </p>
+                <button class="btn btn-primary" id="startBtn">Start</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="questions">
+        <div class="row">
+            <div class="col-12 ">
+                <h4 class="text-right ">
+                    <span id="timer" class="badge badge-secondary">
+                        05:22
+                    </span>
+                </h4>
+                <h2 id="question-title">#1 Lorem ipsum, dolor sit amet consectetur adipisicing elit</h2>
+            </div>
+            <div id="answers" class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="answer-1" value="value"
+                        checked>
+                    <label id="label-1" class="form-check-label" for="answer-1">
+                        Default radio
+                    </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <br>
+                <button class="btn btn-primary" id="submit">Submit</button>
+            </div>
+            <div class="col-12">
+                <hr>
+                <p id="result" class="alert alert-danger">
+                    Wrong
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center" id="score">
+        <div class="row">
+            <div class="col-12">
+                <h3>All Done!</h3>
+                <h1 id="scorePercentage">75%</h1>
+                <form class="form-inline d-flex justify-content-center mt-4">
+                    <div class="form-group ">
+                        <label for="inputInitials" class="sr-only">Initials</label>
+                        <input type="text" class="form-control" id="inputInitials" placeholder="Initials">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="confirm">Confirm </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="highScores">
+        <div class="row">
+            <div class="col-12">
+                <h3>
+                    High Scores
+                </h3>
+                <ul id="score-list" class="list-group">
+                    <li class="list-group-item">1. JJ - 50%</li>
+                    <li class="list-group-item">1. JJ - 50% </li>
+                    <li class="list-group-item">1. JJ - 50%</li>
+                    <li class="list-group-item">1. JJ - 50%</li>
+                    <li class="list-group-item">1. JJ - 50%</li>
+                </ul>
+                <button id="goBack" class=" btn btn-primary mt-4">Go Back</button>
+                <button id="clear" class=" btn btn-secondary mt-4 ">Clear High Scores</button>
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
