@@ -15,11 +15,18 @@ let timer = document.getElementById('timer')
 // let highScores = document.getElementById('highScores')
 // let highScores = document.getElementById('highScores')
 
-// hide pages that aren;t active
+// hide pages that aren't active
 questions.style.display = 'none'
 score.style.display = 'none'
 highScores.style.display = 'none'
 
+startBtn.addEventListener('click', () => {
+  // change page
+  questions.style.display = 'block'
+  welcome.style.display = 'none'
+
+  // start timer
+})
 // start timer and display first question when button clicked
 // when question is answered , display next question
 // display "correct" or "wrong " under answers
