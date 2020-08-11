@@ -48,7 +48,7 @@ highScores.style.display = 'none'
 result.style.display = 'none'
 
 let counter = 90
-let userScore = 100
+let userScore = 0
 let currentQuestionIndex = 0
 let selectedAnswer = ''
 let userInitial = ''
@@ -97,28 +97,29 @@ let checkAnswer = () => {
   // display "correct" or "wrong " under answers
 
   if (selectedAnswer === quizData[currentQuestionIndex].correctAnswer) {
+    // update score
+    userScore += 100 / quizData.length
     result.innerHTML = 'Correct!'
     result.className = 'alert alert-success'
   } else {
-    // update score
-    userScore -= 100 / quizData.length
     result.innerHTML = 'Wrong!'
     result.className = 'alert alert-danger'
     // IF question is answered wrong, deduct time from timer
     counter -= 10
   }
-}
-setTimeout(() => {
-  result.style.display = 'none'
-}, 1000)
 
-if (currentQuestionIndex < quizData.length - 1) {
-  currentQuestionIndex++
-  renderQuestion()
-} else {
-  questions.style.display = 'none'
-  score.style.display = 'block'
-  scorePercentage.innerHTML = userScore + '%'
+  setTimeout(() => {
+    result.style.display = 'none'
+  }, 1000)
+
+  if (currentQuestionIndex < quizData.length - 1) {
+    currentQuestionIndex++
+    renderQuestion()
+  } else {
+    questions.style.display = 'none'
+    score.style.display = 'block'
+    scorePercentage.innerHTML = userScore + '%'
+  }
 }
 // update current queston index
 
@@ -149,9 +150,7 @@ clear.addEventListener('click', () => {
 })
 
 goBack.addEventListener('click', () => {
-  highScores.style.display = 'none'
-  welcome.style.display = 'block'
-  renderQuestion()
+  window.location.reload()
 })
 
 let startTimer = function () {
@@ -162,7 +161,7 @@ let startTimer = function () {
     if (counter <= 0) {
       questions.style.display = 'none'
       score.style.display = 'block'
-      clearInterval(counter)
+      scorePercentage.innerHTML = userScore + '%'
     }
   }, 1000)
 }
