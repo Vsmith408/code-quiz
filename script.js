@@ -1,24 +1,25 @@
 // questions & answers
 let quizData = [
   {
-    question: 'Whats 1 + 1?',
-    answers: ['2', '3', '4', '5'],
-    correctAnswer: '2',
+    question: 'JavaScript is a ___ -side programming language',
+    answers: ['Server', 'Client', 'Both', 'None'],
+    correctAnswer: 'Both',
   },
   {
-    question: 'Whats 4 + 1?',
-    answers: ['2', '3', '4', '5'],
-    correctAnswer: '5',
+    question:
+      'How to return the first value of this array? let myArr = [1, 2, 3, 4, 5]; let myVal =',
+    answers: ['myArr[0]', 'myArr.pop()', 'myArr[1]', 'myArr.shift()'],
+    correctAnswer: 'myArr[0]',
   },
   {
-    question: 'Whats 6 + 1?',
-    answers: ['2', '3', '4', '7'],
-    correctAnswer: '7',
+    question: 'What is the proper syntax for a If statement?',
+    answers: ['(if x = 0) []', 'if(x = 0) {}', 'IF(x = 0)[]', 'if[x=0 {}]'],
+    correctAnswer: 'if(x = 0) {}',
   },
   {
-    question: 'Whats 10 + 1?',
-    answers: ['11', '3', '4', '5'],
-    correctAnswer: '11',
+    question: 'Which of these is not a logial operator',
+    answers: ['!', '&&', '||', '&'],
+    correctAnswer: '&',
   },
 ]
 
@@ -46,6 +47,7 @@ score.style.display = 'none'
 highScores.style.display = 'none'
 result.style.display = 'none'
 
+let counter = 90
 let userScore = 100
 let currentQuestionIndex = 0
 let selectedAnswer = ''
@@ -54,7 +56,7 @@ let userHighScores = []
 if (localStorage.getItem('userHighScores')) {
   userHighScores = JSON.parse(localStorage.getItem('userHighScores'))
 }
-
+// when question is answered , display next question
 let renderQuestion = () => {
   answers.innerHTML = ''
   let currentQuestion = quizData[currentQuestionIndex]
@@ -92,6 +94,8 @@ let checkAnswer = () => {
   result.style.display = 'block'
 
   // check answer
+  // display "correct" or "wrong " under answers
+
   if (selectedAnswer === quizData[currentQuestionIndex].correctAnswer) {
     result.innerHTML = 'Correct!'
     result.className = 'alert alert-success'
@@ -100,21 +104,23 @@ let checkAnswer = () => {
     userScore -= 100 / quizData.length
     result.innerHTML = 'Wrong!'
     result.className = 'alert alert-danger'
+    // IF question is answered wrong, deduct time from timer
+    counter -= 10
   }
-  setTimeout(() => {
-    result.style.display = 'none'
-  }, 1000)
-
-  if (currentQuestionIndex < quizData.length - 1) {
-    currentQuestionIndex++
-    renderQuestion()
-  } else {
-    questions.style.display = 'none'
-    score.style.display = 'block'
-    scorePercentage.innerHTML = userScore + '%'
-  }
-  // update current queston index
 }
+setTimeout(() => {
+  result.style.display = 'none'
+}, 1000)
+
+if (currentQuestionIndex < quizData.length - 1) {
+  currentQuestionIndex++
+  renderQuestion()
+} else {
+  questions.style.display = 'none'
+  score.style.display = 'block'
+  scorePercentage.innerHTML = userScore + '%'
+}
+// update current queston index
 
 submit.addEventListener('click', checkAnswer)
 
@@ -148,18 +154,24 @@ goBack.addEventListener('click', () => {
   renderQuestion()
 })
 
+let startTimer = function () {
+  setInterval(function () {
+    counter--
+    timer.innerHTML = counter
+    // game over when all questions answered OR time is up
+    if (counter <= 0) {
+      questions.style.display = 'none'
+      score.style.display = 'block'
+      clearInterval(counter)
+    }
+  }, 1000)
+}
+
 startBtn.addEventListener('click', () => {
   // change page
   questions.style.display = 'block'
   welcome.style.display = 'none'
   renderQuestion()
   // start timer
+  startTimer()
 })
-// start timer and display first question when button clicked
-// when question is answered , display next question
-// display "correct" or "wrong " under answers
-// IF question is answered wrong, deduct time from timer
-// game over when all questions answered OR time is up
-// display score at end
-// create an input to enter initials
-// submit button to store initials and score to local storage
